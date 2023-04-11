@@ -1,0 +1,5 @@
+{"vcs1":{"timestamp_begin":1680283195.262897159, "rt":0.12, "ut":0.06, "st":0.04}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1680283194.896570174}
+{"VCS_COMP_START_TIME": 1680283194.896570174}
+{"VCS_COMP_END_TIME": 1680283195.418389649}
+{"VCS_USER_OPTIONS": "+lint=all -sverilog -debug datapath.sv FSM.sv library.sv testbench.sv top.sv"}
