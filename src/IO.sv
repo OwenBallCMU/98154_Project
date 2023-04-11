@@ -3,7 +3,7 @@
 module IO
  (input  logic clock, reset,
   input  logic [9:0] data_in,
-  input  logic [255:0] registers_packed,
+  input  logic [127:0] registers_packed,
   output logic [10:0] data_out);
 
   logic PWM1, PWM2;
