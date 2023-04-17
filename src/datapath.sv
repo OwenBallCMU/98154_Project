@@ -86,7 +86,7 @@ module memory
 
   integer j;
   always_comb
-    for (j = 0; j < 9; j=j+1) registers_packed[(8*(j+1)-1)-:8] = registers[j];
+    for (j = 0; j < `REGCOUNT; j=j+1) registers_packed[(8*(j+1)-1)-:8] = registers[j];
 
   assign reg_out = registers[1];
 
