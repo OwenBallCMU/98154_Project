@@ -76,9 +76,9 @@ module memory
   input logic [7:0] data_in,
   output logic data_out,
   output logic [7:0] reg_out,
-  output logic [31:0] registers_packed);
+  output logic [71:0] registers_packed);
 
-  logic [7:0] registers [3:0];
+  logic [7:0] registers [8:0];
 
   logic [2:0] index;
   logic [7:0] data_out_8;
@@ -86,7 +86,7 @@ module memory
 
   integer j;
   always_comb
-    for (j = 0; j < 4; j=j+1) registers_packed[(8*(j+1)-1)-:8] = registers[j];
+    for (j = 0; j < 9; j=j+1) registers_packed[(8*(j+1)-1)-:8] = registers[j];
 
   assign reg_out = registers[1];
 
