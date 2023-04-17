@@ -9,7 +9,7 @@ module my_chip (
     
     logic SCL_in, SDA_in, SDA_out;
     logic [7:0] reg_out;
-    logic [71:0] registers_packed;
+    logic [31:0] registers_packed;
     logic clock, SDA_out_temp, in_wait;
 
     logic [10:0] data_out;

@@ -11,7 +11,7 @@ module chipInterface (
 
     logic [31:0] counter;
     logic [7:0] reg_out;
-    logic [71:0] registers_packed;
+    logic [31:0] registers_packed;
     logic clock, SDA_out_temp, in_wait;
 
     logic [10:0] data_out;
@@ -48,7 +48,7 @@ module I2C
  (input  logic SCL_in, SDA_in, clock, reset,
   output logic SDA_out, in_wait,
   output logic [7:0] reg_out,
-  output logic [71:0] registers_packed);
+  output logic [31:0] registers_packed);
 
   logic SCL_sync, SDA_sync, counted_8, clear_counter, start, stop, clear_start;
   logic clear_stop, addr_valid, clear_mem, in_enable, send_ack, we, out_en, ACK;
