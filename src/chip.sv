@@ -1,5 +1,7 @@
 `default_nettype none
 
+`define REGCOUNT 16
+
 module my_chip (
     input logic [11:0] io_in, // Inputs to your chip
     output logic [11:0] io_out, // Outputs from your chip
@@ -9,7 +11,7 @@ module my_chip (
     
     logic SCL_in, SDA_in, SDA_out;
     logic [7:0] reg_out;
-    logic [127:0] registers_packed;
+    logic [8*`REGCOUNT-1:0] registers_packed;
     logic clock, SDA_out_temp, in_wait;
 
     logic [10:0] data_out;
