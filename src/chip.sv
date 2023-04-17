@@ -1,6 +1,6 @@
 `default_nettype none
 
-`define REGCOUNT 24
+`define REGCOUNT 20
 
 module my_chip (
     input logic [11:0] io_in, // Inputs to your chip
