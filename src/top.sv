@@ -1,6 +1,6 @@
 `default_nettype none
 
-`define REGCOUNT 28
+`define REGCOUNT 24
 
 module chipInterface (
     input logic clk100, // 100MHz clock
