@@ -11,24 +11,6 @@
         "module",
         4
     ],
-    "IO": [
-        "IO",
-        "LI4g0",
-        "module",
-        3
-    ],
-    "my_chip": [
-        "my_chip",
-        "P0xrA",
-        "module",
-        2
-    ],
-    "I2C": [
-        "I2C",
-        "cxrMd",
-        "module",
-        5
-    ],
     "...MASTER...": [
         "SIM",
         "amcQw",
