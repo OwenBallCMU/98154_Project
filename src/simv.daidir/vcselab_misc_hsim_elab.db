@@ -1,6 +1,6 @@
 psSimBaseName                      	simv
 psLogFileName                      	NULL
-pDaiDir                            	/afs/andrew.cmu.edu/usr14/oball/private/98154/Project_v2/simv.daidir
+pDaiDir                            	/afs/andrew.cmu.edu/usr14/oball/private/98154_Project/src/simv.daidir
 destPath                           	csrc/
 fSharedMaster                      	0
 fHsimPCSharedLibSpecified          	0

@@ -1,6 +1,6 @@
 #!/bin/csh -f
 
-cd /afs/andrew.cmu.edu/usr14/oball/private/98154/Project_v2
+cd /afs/andrew.cmu.edu/usr14/oball/private/98154_Project/src
 
 #This ENV is used to avoid overriding current script in next vcselab run 
 setenv SNPS_VCSELAB_SCRIPT_NO_OVERRIDE  1

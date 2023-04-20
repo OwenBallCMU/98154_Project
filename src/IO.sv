@@ -2,7 +2,6 @@
 
 module IO
  (input  logic clock, reset,
-  input  logic [9:0] data_in,
   input  logic [8*`REGCOUNT-1:0] registers_packed,
   output logic [10:0] data_out);
 
@@ -63,7 +62,7 @@ module PWM
       counter2 <= 16'b1;
     end
     else if (counter1 >= PWM_div) begin
-      if (counter2 >= PWMT) counter2 <= 16'b0;
+      if (counter2 >= PWMT - 16'b1) counter2 <= 16'b0;
       else counter2 <= counter2 + 16'b1;
       counter1 <= 8'b1;
     end
