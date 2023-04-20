@@ -1,9 +1,12 @@
 `default_nettype none
 
+`define REGCOUNT 20
+
 module chipInterface (
     input logic clk100, // 100MHz clock
     input logic reset_n, // Active-low reset
     input logic SCL_in, SDA_in, i2c_reset,
+    input logic [7:0] parallel_in,
     output logic [1:0] PWM,
     output logic [7:0] led,
     output logic SDA_out
@@ -11,11 +14,10 @@ module chipInterface (
 
     logic [31:0] counter;
     logic [7:0] reg_out;
-    logic [127:0] registers_packed;
+    logic [8*`REGCOUNT-1:0] registers_packed;
     logic clock, SDA_out_temp, in_wait;
 
     logic [10:0] data_out;
-    logic [9:0] data_in;
 
     always_ff @(posedge clk100)
         if (~reset_n) begin
@@ -31,9 +33,9 @@ module chipInterface (
         end
 
 
-    I2C M1 (.SCL_in, .SDA_in, .clock, .reset(i2c_reset), .SDA_out(SDA_out_temp), .reg_out, .in_wait, .registers_packed);
+    I2C M1 (.SCL_in, .SDA_in, .clock, .reset(i2c_reset), .SDA_out(SDA_out_temp), .reg_out, .in_wait, .registers_packed, .parallel_in);
 
-    IO  M2 (.registers_packed, .data_in, .data_out, .clock, .reset(i2c_reset));
+    IO  M2 (.registers_packed, .data_out, .clock, .reset(i2c_reset));
 
     assign SDA_out = ~SDA_out_temp;
     //assign led = reg_out;
@@ -46,9 +48,10 @@ endmodule: chipInterface
 
 module I2C
  (input  logic SCL_in, SDA_in, clock, reset,
+  input  logic [7:0] parallel_in,
   output logic SDA_out, in_wait,
   output logic [7:0] reg_out,
-  output logic [127:0] registers_packed);
+  output logic [8*`REGCOUNT-1:0] registers_packed);
 
   logic SCL_sync, SDA_sync, counted_8, clear_counter, start, stop, clear_start;
   logic clear_stop, addr_valid, clear_mem, in_enable, send_ack, we, out_en, ACK;
@@ -75,7 +78,7 @@ module I2C
   reg_sel REG(.reset, .clock, .SCL_negedge, .sel_out(reg_sel_latched), .sel_in(data_in[4:0]), .en(reg_sel_en), .inc(reg_sel_inc));
 
   memory MEM (.we, .clock, .SCL_negedge, .reset, .sel(reg_sel_latched), .count(count[2:0]), 
-              .data_in(data_in[7:0]), .data_out, .reg_out, .registers_packed);
+              .data_in(data_in[7:0]), .data_out, .reg_out, .registers_packed, .parallel_in);
 
   get_ack READ_ACK (.clock, .SCL_posedge, .SDA(SDA_sync), .ACK);
 

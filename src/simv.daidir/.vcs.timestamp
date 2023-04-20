@@ -22,18 +22,18 @@
 -picarchive
 -sverilog
 /afs/ece.cmu.edu/support/synopsys/synopsys.release/T-Foundation/vcs/T-2022.06/linux64/bin/vcs1
+chip.sv
 datapath.sv
-FSM.sv
 IO.sv
+FSM.sv
 library.sv
-testbench.sv
 top.sv
 60
 no_proxy=localhost,127.0.0.1,.cmu.edu,.cmu.local
 https_proxy=http://proximus.ece.cmu.edu:3128/
 http_proxy=http://proximus.ece.cmu.edu:3128/
 ftp_proxy=http://proximus.ece.cmu.edu:3128/
-XDG_SESSION_ID=6817
+XDG_SESSION_ID=8428
 XDG_RUNTIME_DIR=/run/user/2673517
 XDG_DATA_DIRS=/afs/andrew.cmu.edu/usr14/oball/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
 VMR_MODE_FLAG=32
@@ -54,9 +54,9 @@ UNAME=/bin/uname
 TOOL_HOME=/afs/ece.cmu.edu/support/synopsys/synopsys.release/T-Foundation/vcs/T-2022.06/linux64
 SYN_DIR=/syn/T-2022.03-SP2
 SYNOPSYS_HOME=/afs/ece.cmu.edu/support/synopsys/synopsys.release/T-Foundation
-SSH_TTY=/dev/pts/418
-SSH_CONNECTION=172.26.253.148 50681 172.19.137.179 22
-SSH_CLIENT=172.26.253.148 50681 22
+SSH_TTY=/dev/pts/458
+SSH_CONNECTION=172.26.253.148 50395 172.19.137.179 22
+SSH_CLIENT=172.26.253.148 50395 22
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
 SNPS_VCS_CLANG_PATH=/afs/ece.cmu.edu/support/synopsys/synopsys.release/T-Foundation/vcs/T-2022.06/linux64/clang
 SNPS_INTERNAL_VCS_LINUX_OS=linux
@@ -92,16 +92,16 @@ AKLOG=/usr/bin/aklog
 0
 0
 6
-1681065203 top.sv
-1680564204 testbench.sv
+1681772697 top.sv
 1680211444 library.sv
-1681065433 IO.sv
 1680283238 FSM.sv
-1680568813 datapath.sv
+1681769075 IO.sv
+1681773169 datapath.sv
+1681773535 chip.sv
 4
 1654054205 /afs/ece.cmu.edu/support/synopsys/synopsys.release/T-Foundation/vcs/T-2022.06/linux64/lib/libvirsim.so
 1654053585 /afs/ece.cmu.edu/support/synopsys/synopsys.release/T-Foundation/vcs/T-2022.06/linux64/lib/liberrorinf.so
 1654053489 /afs/ece.cmu.edu/support/synopsys/synopsys.release/T-Foundation/vcs/T-2022.06/linux64/lib/libsnpsmalloc.so
 1654053565 /afs/ece.cmu.edu/support/synopsys/synopsys.release/T-Foundation/vcs/T-2022.06/linux64/lib/libvfs.so
-1681065435 simv.daidir
+1681773537 simv.daidir
 -1 partitionlib

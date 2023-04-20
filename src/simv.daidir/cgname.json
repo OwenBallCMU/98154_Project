@@ -5,9 +5,27 @@
         "module",
         1
     ],
+    "my_chip": [
+        "my_chip",
+        "P0xrA",
+        "module",
+        2
+    ],
+    "IO": [
+        "IO",
+        "LI4g0",
+        "module",
+        3
+    ],
     "chipInterface": [
         "chipInterface",
         "Cr8np",
+        "module",
+        4
+    ],
+    "I2C": [
+        "I2C",
+        "cxrMd",
         "module",
         5
     ],

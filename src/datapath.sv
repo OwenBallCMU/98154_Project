@@ -74,19 +74,20 @@ module memory
   input logic [4:0] sel, 
   input logic [2:0] count,
   input logic [7:0] data_in,
+  input logic [7:0] parallel_in,
   output logic data_out,
   output logic [7:0] reg_out,
-  output logic [127:0] registers_packed);
+  output logic [8*`REGCOUNT-1:0] registers_packed);
 
-  logic [7:0] registers [31:0];
+  logic [7:0] registers [`REGCOUNT-1:0];
 
   logic [2:0] index;
   logic [7:0] data_out_8;
-  logic [5:0] i;
-
+  
+  integer i;
   integer j;
   always_comb
-    for (j = 0; j < 16; j=j+1) registers_packed[(8*(j+1)-1)-:8] = registers[j];
+    for (j = 0; j < `REGCOUNT; j=j+1) registers_packed[(8*(j+1)-1)-:8] = registers[j];
 
   assign reg_out = registers[1];
 
@@ -96,12 +97,16 @@ module memory
 
   always_ff @(posedge clock, posedge reset) begin
     if (reset) begin
-      for (i = 6'd0; i < 6'd32; i=i+6'd1) registers[i] <= 8'b0; 
+      for (i = 0; i < 32; i=i+1) registers[i] <= 8'b0; 
     end 
-    else if (we & SCL_negedge) begin
-      registers[sel] <= data_in;
+    else begin
+      if (we & SCL_negedge & sel != 5'h0) begin
+        registers[sel] <= data_in;
+      end
+      else if (SCL_negedge) index <= count;
+      
+      registers[0] <= parallel_in;
     end
-    else if (SCL_negedge) index <= count;
   end
 
 endmodule: memory
