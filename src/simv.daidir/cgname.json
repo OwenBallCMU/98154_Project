@@ -5,11 +5,11 @@
         "module",
         1
     ],
-    "my_chip": [
-        "my_chip",
-        "P0xrA",
+    "chipInterface": [
+        "chipInterface",
+        "Cr8np",
         "module",
-        2
+        4
     ],
     "IO": [
         "IO",
@@ -17,11 +17,11 @@
         "module",
         3
     ],
-    "chipInterface": [
-        "chipInterface",
-        "Cr8np",
+    "my_chip": [
+        "my_chip",
+        "P0xrA",
         "module",
-        4
+        2
     ],
     "I2C": [
         "I2C",

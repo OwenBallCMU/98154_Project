@@ -9,6 +9,7 @@ project:
     - top.sv
     - datapath.sv
     - library.sv
+    - I2C.sv
   top_module:  "toplevel_chip"
 
 # As everyone will have access to all designs, try to make it easy for someone new to your design to know what
