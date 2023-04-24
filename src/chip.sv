@@ -12,16 +12,14 @@ module my_chip (
     logic SCL_in, SDA_in, SDA_out;
     logic [7:0] reg_out;
     logic [8*`REGCOUNT-1:0] registers_packed;
-    logic clock, SDA_out_temp, in_wait;
+    logic SDA_out_temp, in_wait;
 
     logic [10:0] data_out;
-    logic [9:0] data_in;
 
     assign SCL_in = io_in[0];
     assign SDA_in = io_in[1];
-    assign data_in = io_in[11:2];
 
-    I2C M1 (.SCL_in, .SDA_in, .clock, .reset, .SDA_out(SDA_out_temp), .reg_out, .in_wait, .registers_packed, .parallel_in(data_in[7:0]));
+    I2C M1 (.SCL_in, .SDA_in, .clock, .reset, .SDA_out(SDA_out_temp), .reg_out, .in_wait, .registers_packed, .parallel_in(io_in[11:4]));
 
     IO  M2 (.registers_packed, .data_out, .clock, .reset);
 

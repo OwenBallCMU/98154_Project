@@ -25,15 +25,13 @@ module PWM_out
   logic [15:0] PWM1H, PWM1T, PWM2H, PWM2T;
   logic [7:0] PWM1_div, PWM2_div;
 
-
-  assign PWM1H = registers_packed[8*('h5)+7 -: 16];
-  assign PWM1T = registers_packed[8*('h7)+7 -: 16];
-  assign PWM1_div = registers_packed[8*('h8)+7 -: 8];
-  assign PWM2H = registers_packed[8*('ha)+7 -: 16];
-  assign PWM2T = registers_packed[8*('hc)+7 -: 16];
-  assign PWM2_div = registers_packed[8*('hd)+7 -: 8];
-  //assign PWM2 = 1'b0;
-  //assign PWM1 = 1'b0;
+  assign PWM1H = registers_packed[8*('h3)+7 -: 16];
+  assign PWM1T = registers_packed[8*('h5)+7 -: 16];
+  assign PWM1_div = registers_packed[8*('h6)+7 -: 8];
+  assign PWM2H = registers_packed[8*('h8)+7 -: 16];
+  assign PWM2T = registers_packed[8*('ha)+7 -: 16];
+  assign PWM2_div = registers_packed[8*('hb)+7 -: 8];
+ 
   PWM P1 (.clock, .PWM_out(PWM1), .PWMH(PWM1H), .PWMT(PWM1T), .PWM_div(PWM1_div), .reset);
   PWM P2 (.clock, .PWM_out(PWM2), .PWMH(PWM2H), .PWMT(PWM2T), .PWM_div(PWM2_div), .reset);
 

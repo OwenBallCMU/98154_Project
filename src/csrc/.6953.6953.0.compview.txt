@@ -1,0 +1,6 @@
+{"vcs1":{"timestamp_begin":1681962493.681813119, "rt":0.12, "ut":0.06, "st":0.05}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1681962493.357906347}
+{"VCS_COMP_START_TIME": 1681962493.357906347}
+{"VCS_COMP_END_TIME": 1681962493.863657531}
+{"VCS_USER_OPTIONS": "+lint=all top.sv datapath.sv FSM.sv library.sv IO.sv"}
+{"vcs1": {"peak_mem": 321740}}
