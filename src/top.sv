@@ -1,7 +1,5 @@
 `default_nettype none
 
-`define REGCOUNT 20
-
 module chipInterface (
     input logic clk100, // 100MHz clock
     input logic reset_n, // Active-low reset

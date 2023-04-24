@@ -104,7 +104,7 @@ module memory
         registers[sel] <= data_in;
       end
       else if (SCL_negedge) index <= count;
-      
+    
       registers[0] <= parallel_in;
     end
   end
