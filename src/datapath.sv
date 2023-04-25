@@ -82,7 +82,7 @@ module memory
   logic [7:0] registers [`REGCOUNT-1:0];
 
   logic [2:0] index;
-  logic [7:0] data_out_8;
+  logic [7:0] data_out_8, parallel_in_temp;
   
   integer i;
   integer j;
@@ -97,7 +97,7 @@ module memory
 
   always_ff @(posedge clock, posedge reset) begin
     if (reset) begin
-      for (i = 0; i < 32; i=i+1) registers[i] <= 8'b0; 
+      for (i = 1; i < 32; i=i+1) registers[i] <= 8'b0; 
     end 
     else begin
       if (we & SCL_negedge & sel != 5'h0) begin
@@ -105,7 +105,8 @@ module memory
       end
       else if (SCL_negedge) index <= count;
     
-      registers[0] <= parallel_in;
+      registers[0] <= parallel_in_temp;
+      parallel_in_temp <= parallel_in;
     end
   end
 

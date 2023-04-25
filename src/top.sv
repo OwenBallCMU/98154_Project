@@ -28,7 +28,7 @@ always_ff @(posedge clk100)
         end
 
   
-assign io_in = {2'b00, parallel_in, SDA_in, SCL_in};
+assign io_in = {parallel_in, 2'b0, SDA_in, SCL_in};
 assign led = io_out[11:4];
 assign PWM = io_out[3:2];
 assign SDA_out = io_out[0];
