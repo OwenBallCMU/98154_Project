@@ -1,11 +1,13 @@
-# (project name)
+# I2C Peripheral Device
 
-(your name)
+Owen Ball
 18-224/624 Spring 2023 Final Tapeout Project
 
 ## Overview
 
-(high-level overview of what your project does, in a few lines)
+An I2C peripheral device with 20 8-bit registers. The device has one read only register
+set to the value of 8 parallel inputs. The value of one register is outputted as a
+parallel output. The device also features two PWM outputs controlled using the registers.
 
 ## How it Works
 
@@ -13,7 +15,7 @@
 
 To add images, upload them into the repo and use the following format to embed them in markdown:
 
-![](image1.png)
+![](media/registers.png)
 
 ## Inputs/Outputs
 
