@@ -19,6 +19,7 @@ To add images, upload them into the repo and use the following format to embed t
 ## Inputs/Outputs
 
 This design takes in a clock, active high reset, and has the following IO:
+
 ![](media/IO.png)
 
 The inputs consist of the SCL line, the SDA line, and 8 input pins. These pins
@@ -27,11 +28,24 @@ directly map to the read-only register 0x00 as shown in the register map below.
 The first output is SDA_N, which is the inverted SDA output of the chip, which
 should then be connected to the gate of an NMOS to pull the SDA line to ground.
 The chip also has two PWM outputs. The functionality of these pins will be discussed in
-the PWM section. The last set of outputs is the 8-bit value stored in register 0x01 on the device.
+the PWM section. The last set of outputs is the 8-bit value stored in register 0x01 on the design.
 
 In order for proper function of the I2C line, the input clock should be approximately 10 to 15 times
 the frequency of the bus. To operate at the standard I2C clock speed of 100kHz, a clock of at least
 1MHz should be used.
+
+## Register Map
+
+The design consists of 20 registers. 
+
+Register 0x00 is a read only register set to the value on the inputs D0_IN - D7_IN
+
+Register 0x01 is directly outputted onto D0_OUT - D7_OUT
+
+Registers 0x02-0x0B are used for controlling the PWM pins. However, they can be used
+as memory registers if the PWM outputs are ignored or the PWM divider is set to 0.
+
+Registers 0x0C-0x13 are not assigned to any function and can be used as volatile I2C memory
 
 ![](media/registers.png)
 
