@@ -13,6 +13,7 @@ module IO
 
   PWM_out PWM_DRIVER (.registers_packed, .clock, .PWM1, .PWM2, .reset);
   assign data_out[2:1] = {PWM2, PWM1};
+  assign data_out[0] = 1'b0;
 
 endmodule: IO
 

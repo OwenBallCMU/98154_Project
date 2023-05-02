@@ -3,7 +3,7 @@
 //A Mealy FSM to control the state of the chip
 module FSM
   (output logic clear_stop, clear_start, clear_counter, clear_mem, in_enable, send_ack,
-   output logic reg_sel_en, reg_sel_inc, we, out_en, in_wait,
+   output logic reg_sel_en, reg_sel_inc, we, out_en,
    input  logic clock, start, stop, reset, counted_8, addr_valid, ACK,
    input  logic SCL_negedge,
    input  logic [7:0] data_in);
@@ -13,8 +13,8 @@ module FSM
   logic read_write;
   assign read_write = data_in[0];
  
-  assign in_wait = (currState == WRITE);
-  //Determines nextState given currState and status points/inputs
+
+  //nextState logic
   always_comb begin
     case (currState)
       RESET: nextState = INIT;
@@ -42,6 +42,7 @@ module FSM
  
   //Determines the output of the FSM given currState
   always_comb begin
+    //default values
     clear_stop = 1'b0;
     clear_start = 1'b0;
     clear_counter = 1'b0;
@@ -62,6 +63,8 @@ module FSM
       GET_REG: in_enable = 1'b1;
       REG_ACK: {send_ack, clear_counter, reg_sel_en} = 3'b111;
       WRITE: begin
+              //handles the repeated start condition used when writing the register
+              //to read from, then immediately reading that register
               if (start) clear_counter = 1'b1;
               else in_enable = 1'b1;
 
@@ -74,6 +77,7 @@ module FSM
     endcase
   end
   
+  //State transitions
   always_ff @(posedge clock) begin
     if (reset) currState <= RESET;
     else if (stop) currState <= INIT;

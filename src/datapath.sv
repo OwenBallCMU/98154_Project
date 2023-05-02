@@ -1,5 +1,6 @@
 `default_nettype none 
 
+//Detects the start bit on the bus
 module start_detect 
  (input  logic SCL, SDA_negedge, clear_start, clock,
   output logic start);
@@ -11,6 +12,7 @@ module start_detect
 endmodule: start_detect
 
 
+//Detects the stop bit on the bus
 module stop_detect 
  (input  logic SCL, SDA_posedge, clear_stop, clock,
   output logic stop);
@@ -22,6 +24,7 @@ module stop_detect
 endmodule: stop_detect
 
 
+//Uses a shift register to read in the data from the I2C line
 module data_input
  (input  logic SCL_posedge, SDA, enable, reset, clock,
   output logic [7:0] data_in);
@@ -31,6 +34,8 @@ module data_input
 
 endmodule: data_input
 
+
+//Counts the # of bits sent on the bus, and sets a flag when it reaches 8
 module count_8
  (input  logic clear, clock, en,
   output logic done,
@@ -45,6 +50,7 @@ module count_8
 endmodule: count_8
 
 
+//Determines if the address sent is 0x20;
 module check_addr
  (input logic [6:0] data_in,
   output logic addr_valid);
@@ -54,7 +60,7 @@ module check_addr
 endmodule: check_addr
 
 
-
+//Sets the selected register or increments it
 module reg_sel
  (input logic [4:0] sel_in,
   input logic inc, en, clock, reset, SCL_negedge,
@@ -68,7 +74,7 @@ module reg_sel
 
 endmodule: reg_sel
 
-
+//A collection of registers to read/write from
 module memory
  (input logic we, clock, reset, SCL_negedge,
   input logic [4:0] sel, 
@@ -86,15 +92,18 @@ module memory
   
   integer i;
   integer j;
+
+  //Packs the registers into an array so it can be outputted (when converted to verilog)
   always_comb
     for (j = 0; j < `REGCOUNT; j=j+1) registers_packed[(8*(j+1)-1)-:8] = registers[j];
 
   assign reg_out = registers[1];
 
+  //Gets a bit from the selected register when writing to bus
   assign data_out = data_out_8[3'b111 - index];
-
   assign data_out_8 = registers[sel];
 
+  //Writes to the selected register, resets, and sets the read only register
   always_ff @(posedge clock, posedge reset) begin
     if (reset) begin
       for (i = 1; i < 32; i=i+1) registers[i] <= 8'b0; 
@@ -113,7 +122,7 @@ module memory
 endmodule: memory
 
 
-
+//Determines if the output line should be pulled low or not
 module gen_output
  (input logic  send_ack, serial_out, out_en,
   output logic SDA_out);
@@ -125,7 +134,7 @@ module gen_output
 
 endmodule: gen_output
 
-
+//Determines if an ack is set by master (or any 0 bit for that matter)
 module get_ack
   (input logic SCL_posedge, SDA, clock,
    output logic ACK);
@@ -136,6 +145,7 @@ module get_ack
 endmodule: get_ack
 
 
+//Detects the edges of a signal
 module edge_detect
   (input logic sig, clock, 
    output logic sig_posedge, sig_negedge, sig_out);
@@ -153,11 +163,11 @@ module edge_detect
 
     prev <= sig;
   end
-
 endmodule: edge_detect
 
 
-//A synchronizer module to synchronize an asynchronous input to a clock
+//A synchronizer module to synchronize an asynchronous input to a clock, as
+//well as to determine clock edges
 module synchronizer_edge_detect
   (input  logic async, clock,
    output logic sync, sig_posedge, sig_negedge);
