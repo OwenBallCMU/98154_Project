@@ -5,6 +5,7 @@
 module I2C
  (input  logic SCL_in, SDA_in, clock, reset,
   input  logic [7:0] parallel_in,
+  input  logic [1:0] addr_sel,
   output logic SDA_out,
   output logic [7:0] reg_out,
   output logic [8*`REGCOUNT-1:0] registers_packed);
@@ -35,7 +36,7 @@ module I2C
   data_input IN_REG (.clock, .SCL_posedge, .SDA(SDA_sync), .enable(in_enable), .data_in, .reset);
 
   //Checks if the address matches 0x20
-  check_addr ADDR (.data_in(data_in[7:1]), .addr_valid);
+  check_addr ADDR (.data_in(data_in[7:1]), .addr_valid, .addr_sel);
 
   //Selects the target register
   reg_sel REG(.reset, .clock, .SCL_negedge, .sel_out(reg_sel_latched), .sel_in(data_in[4:0]), .en(reg_sel_en), .inc(reg_sel_inc));

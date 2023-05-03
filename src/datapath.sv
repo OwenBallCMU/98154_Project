@@ -53,9 +53,20 @@ endmodule: count_8
 //Determines if the address sent is 0x20;
 module check_addr
  (input logic [6:0] data_in,
+  input logic [1:0] addr_sel,
   output logic addr_valid);
 
-  assign addr_valid = (data_in == 7'h20);
+  logic [6:0] addr;
+
+  assign addr_valid = (data_in == addr);
+
+  always_comb
+    unique case (addr_sel)
+      2'b00: addr = 7'h20;
+      2'b01: addr = 7'h21;
+      2'b10: addr = 7'h22;
+      2'b11: addr = 7'h23;
+    endcase
 
 endmodule: check_addr
 
@@ -69,7 +80,8 @@ module reg_sel
   always_ff @(posedge clock, posedge reset) begin
     if (reset) sel_out <= 5'b00000;
     else if (en & SCL_negedge) sel_out <= sel_in;
-    else if (inc & SCL_negedge) sel_out = sel_out + 5'd1;
+    else if (inc & SCL_negedge & sel_out < `REGCOUNT-1) sel_out <= sel_out + 5'd1;
+    else if (inc & SCL_negedge) sel_out <= 5'b00000;
   end
 
 endmodule: reg_sel
