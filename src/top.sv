@@ -8,7 +8,7 @@ module chipInterface (
     input logic [7:0] parallel_in,
     output logic [1:0] PWM,
     output logic [7:0] led,
-    output logic SDA_out
+    output logic SDA_out, UART
 );
 
 logic [31:0] counter;
@@ -33,6 +33,7 @@ assign io_in = {parallel_in, 2'b0, SDA_in, SCL_in};
 assign led = io_out[11:4];
 assign PWM = io_out[3:2];
 assign SDA_out = io_out[0];
+assign UART = io_out[1];
 
 my_chip CHIP (.io_in, .io_out, .clock, .reset(i2c_reset));
 

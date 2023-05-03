@@ -9,13 +9,6 @@ An I2C peripheral device with 20 8-bit registers. The device has one read only r
 set to the value of 8 parallel inputs. The value of one register is outputted as a
 parallel output. The device also features two PWM outputs controlled using the registers.
 
-## How it Works
-
-(deeper description of your project's internal operations, along with any diagrams. large parts of this can likely be copied from your project design plan and/or RTL checkpoint submission)
-
-To add images, upload them into the repo and use the following format to embed them in markdown:
-
-
 ## Inputs/Outputs
 
 This design takes in a clock, active high reset, and has the following IO:
@@ -58,6 +51,12 @@ somewhere in the range of 2kOhm to 10kOhm, with the NMOS being capable of switch
 and being able to overpower the SDA pull up resistors. Note that this chip does not perform clock stretching and as such, has
 no need to drive the SCL line.
 (if you have any external hardware peripherals such as buttons, LEDs, sensors, etc, please explain them here. otherwise, remove this section)
+
+## How it Works
+
+(deeper description of your project's internal operations, along with any diagrams. large parts of this can likely be copied from your project design plan and/or RTL checkpoint submission)
+
+To add images, upload them into the repo and use the following format to embed them in markdown:
 
 ## Design Testing / Bringup
 

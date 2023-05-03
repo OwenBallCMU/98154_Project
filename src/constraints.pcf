@@ -26,3 +26,5 @@ set_io parallel_in[7] P4
 
 set_io PWM[0] G1
 set_io PWM[1] E1
+
+set_io UART C1

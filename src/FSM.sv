@@ -78,7 +78,7 @@ module FSM
   end
   
   //State transitions
-  always_ff @(posedge clock) begin
+  always_ff @(posedge clock, posedge reset) begin
     if (reset) currState <= RESET;
     else if (stop) currState <= INIT;
     else if (start) currState <= ADDR;

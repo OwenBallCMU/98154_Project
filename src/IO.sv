@@ -5,15 +5,16 @@ module IO
   input  logic [8*`REGCOUNT-1:0] registers_packed,
   output logic [10:0] data_out);
 
-  logic PWM1, PWM2;
+  logic PWM1, PWM2, tx;
   logic [7:0] reg_out;
 
   assign reg_out = registers_packed[8*(1)+7 -: 8];
   assign data_out[10:3] = reg_out;
 
+  UART_TX UART_DRIVER (.clock, .reset, .data(reg_out), .tx);
   PWM_out PWM_DRIVER (.registers_packed, .clock, .PWM1, .PWM2, .reset);
   assign data_out[2:1] = {PWM2, PWM1};
-  assign data_out[0] = 1'b0;
+  assign data_out[0] = tx;
 
 endmodule: IO
 
@@ -71,4 +72,27 @@ module PWM
 
 endmodule: PWM
 
-  
+
+module UART_TX
+ (input  logic clock, reset,
+  input  logic [7:0] data,
+  output logic tx);
+
+  logic [5:0] counter;
+  logic [15:0] frame;
+
+  assign tx = frame[0];
+
+  always_ff @(posedge clock, posedge reset) begin
+    if (reset) begin
+      counter <= 6'b0;
+      frame <= {7'b1111111, 8'b0, 1'b0};
+    end
+    else if (counter >= 6'd51) begin
+      counter <= 6'b0;
+      if (frame <= 16'b1) frame <= {7'b1111111, data, 1'b0};
+      else frame = frame >> 1;
+    end
+    else counter <= counter + 6'b1;
+  end
+endmodule: UART_TX
