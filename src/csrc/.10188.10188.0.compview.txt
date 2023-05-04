@@ -1,0 +1,9 @@
+{"vcs1":{"timestamp_begin":1683178245.714203224, "rt":8.06, "ut":0.20, "st":0.29}}
+{"vcselab":{"timestamp_begin":1683178253.841686980, "rt":3.25, "ut":0.23, "st":0.18}}
+{"link":{"timestamp_begin":1683178257.138352424, "rt":0.50, "ut":0.08, "st":0.08}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1683178245.338876240}
+{"VCS_COMP_START_TIME": 1683178245.338876240}
+{"VCS_COMP_END_TIME": 1683178257.706313727}
+{"VCS_USER_OPTIONS": "+lint=all -sverilog top.sv chip.sv datapath.sv FSM.sv library.sv IO.sv I2C.sv"}
+{"vcs1": {"peak_mem": 337128}}
+{"stitch_vcselab": {"peak_mem": 222608}}

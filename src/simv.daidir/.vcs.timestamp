@@ -34,7 +34,7 @@ no_proxy=localhost,127.0.0.1,.cmu.edu,.cmu.local
 https_proxy=http://proximus.ece.cmu.edu:3128/
 http_proxy=http://proximus.ece.cmu.edu:3128/
 ftp_proxy=http://proximus.ece.cmu.edu:3128/
-XDG_SESSION_ID=9932
+XDG_SESSION_ID=12042
 XDG_RUNTIME_DIR=/run/user/2673517
 XDG_DATA_DIRS=/afs/andrew.cmu.edu/usr14/oball/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
 VMR_MODE_FLAG=32
@@ -55,9 +55,9 @@ UNAME=/bin/uname
 TOOL_HOME=/afs/ece.cmu.edu/support/synopsys/synopsys.release/T-Foundation/vcs/T-2022.06/linux64
 SYN_DIR=/syn/T-2022.03-SP2
 SYNOPSYS_HOME=/afs/ece.cmu.edu/support/synopsys/synopsys.release/T-Foundation
-SSH_TTY=/dev/pts/515
-SSH_CONNECTION=172.26.253.148 53264 172.19.137.179 22
-SSH_CLIENT=172.26.253.148 53264 22
+SSH_TTY=/dev/pts/548
+SSH_CONNECTION=172.26.253.148 49817 172.19.137.179 22
+SSH_CLIENT=172.26.253.148 49817 22
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
 SNPS_VCS_CLANG_PATH=/afs/ece.cmu.edu/support/synopsys/synopsys.release/T-Foundation/vcs/T-2022.06/linux64/clang
 SNPS_INTERNAL_VCS_LINUX_OS=linux
@@ -93,17 +93,17 @@ AKLOG=/usr/bin/aklog
 0
 0
 7
-1682018994 I2C.sv
-1682376735 IO.sv
+1683178071 I2C.sv
+1683083284 IO.sv
 1680211444 library.sv
-1680283238 FSM.sv
-1682378103 datapath.sv
-1682377536 chip.sv
-1682029812 top.sv
+1683178227 FSM.sv
+1683149961 datapath.sv
+1683148116 chip.sv
+1683153166 top.sv
 4
 1654054205 /afs/ece.cmu.edu/support/synopsys/synopsys.release/T-Foundation/vcs/T-2022.06/linux64/lib/libvirsim.so
 1654053585 /afs/ece.cmu.edu/support/synopsys/synopsys.release/T-Foundation/vcs/T-2022.06/linux64/lib/liberrorinf.so
 1654053489 /afs/ece.cmu.edu/support/synopsys/synopsys.release/T-Foundation/vcs/T-2022.06/linux64/lib/libsnpsmalloc.so
 1654053565 /afs/ece.cmu.edu/support/synopsys/synopsys.release/T-Foundation/vcs/T-2022.06/linux64/lib/libvfs.so
-1682378779 simv.daidir
+1683178257 simv.daidir
 -1 partitionlib

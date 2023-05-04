@@ -22,7 +22,7 @@ documentation:
   author:       "Owen Ball"      # Your name
   discord:      "FireyTurtle#1426"      # Your discord handle
   title:        "I2C Peripheral Device"      # Project title
-  description:  "PLACEHOLDER"      # Short description of what your project does
+  description:  "Refer to https://github.com/OwenBallCMU/98154_Project."      # Short description of what your project does
   how_it_works: "PLACEHOLDER"      # Longer description of how the project works
   how_to_test:  "PLACEHOLDER"      # Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
   external_hw:  "PLACEHOLDER"      # Describe any external hardware needed
@@ -31,21 +31,29 @@ documentation:
   clock_hz:     1000000       # Clock frequency in Hz (if required)
   picture:      ""      # relative path to a picture in your repository
   inputs:               # a description of what the inputs do
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
+    - SCL
+    - SDA
+    - ADDR_0
+    - ADDR_1
+    - D0_IN
+    - D1_IN
+    - D2_IN
+    - D3_IN
+    - D4_IN
+    - D5_IN
+    - D6_IN
+    - D7_IN
   outputs:
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
+    - SDA_N
+    - UART_TX
+    - PWM_0
+    - PWM_1
+    - D0_OUT
+    - D1_OUT
+    - D2_OUT
+    - D3_OUT
+    - D4_OUT
+    - D5_OUT
+    - D6_OUT
+    - D7_OUT
 

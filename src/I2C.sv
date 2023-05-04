@@ -11,7 +11,7 @@ module I2C
   output logic [8*`REGCOUNT-1:0] registers_packed);
 
   logic SCL_sync, SDA_sync, counted_8, clear_counter, start, stop, clear_start;
-  logic clear_stop, addr_valid, clear_mem, in_enable, send_ack, we, out_en, ACK;
+  logic clear_stop, addr_valid, in_enable, send_ack, we, out_en, ACK;
   logic SCL_posedge, SCL_negedge, SDA_posedge, SDA_negedge; 
   logic [7:0] data_in;
   logic reg_sel_en, reg_sel_inc, data_out;
