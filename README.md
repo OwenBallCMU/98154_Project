@@ -61,7 +61,7 @@ as memory registers if the PWM outputs are ignored or the PWM divider is set to 
 - Registers 0x0C-0x13 are not assigned to any function and can be used as volatile I2C memory
 
 ![](media/registers.png)
-
+ 
 
 ## UART TX
 The value in register 0x01 is continuously sent on output pin 1. 8 bits are sent per transmission with no parity bit. The line is held high for 7 bits worth of time before the next start bit is sent.
