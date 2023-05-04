@@ -122,10 +122,9 @@ Some of the I2C registers are used to determine the outputs sent to the PWM, UAR
 
 Both the Ice40 FPGA and the ASIC do not support leaving outputs as high impedance. As a result, in order to drive the SDA line, the SDA_N output of the chip must be fed into an NMOS with a pull-up resistor. The drain of the NMOS should then be connected to SDA. Thus when SDA_N is high, SDA is pulled to ground and otherwise, is pulled to 3.3V. The resistor value should be somewhere in the range of 2kOhm to 10kOhm, with the NMOS being capable of switching fast enough for the desired I2C speed and being able to overpower the SDA pull up resistors. Note that this chip does not perform clock stretching and as such, has no need to drive the SCL line. 
 
+![](media/MOSFET.png)
 
-(explain how to test your design; if relevant, give examples of inputs and expected outputs)
-
-(if you would like your design to be tested after integration but before tapeout, provide a Python script that uses the Debug Interface posted on canvas and explain here how to run the testing script)
+The design was tested on an Ice40 FPGA using a RPi Pico running CircuitPython as the coordinator. 
 
 ## Media
 
