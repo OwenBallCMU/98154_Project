@@ -120,16 +120,24 @@ Some of the I2C registers are used to determine the outputs sent to the PWM, UAR
 
 ## Hardware Peripherals
 
-Both the Ice40 FPGA and the ASIC do not support leaving outputs as high impedance. As a result, in order to drive the SDA line, the SDA_N output of the chip must be fed into an NMOS with a pull-up resistor. The drain of the NMOS should then be connected to SDA. Thus when SDA_N is high, SDA is pulled to ground and otherwise, is pulled to 3.3V. The resistor value should be somewhere in the range of 2kOhm to 10kOhm, with the NMOS being capable of switching fast enough for the desired I2C speed and being able to overpower the SDA pull up resistors. Note that this chip does not perform clock stretching and as such, has no need to drive the SCL line. 
+Both the iCE40 FPGA and the ASIC do not support leaving outputs as high impedance. As a result, in order to drive the SDA line, the SDA_N output of the chip must be fed into an NMOS with a pull-up resistor. The drain of the NMOS should then be connected to SDA. Thus when SDA_N is high, SDA is pulled to ground and otherwise, is pulled to 3.3V. The resistor value should be somewhere in the range of 2kOhm to 10kOhm, with the NMOS being capable of switching fast enough for the desired I2C speed and being able to overpower the SDA pull up resistors. Note that this chip does not perform clock stretching and as such, has no need to drive the SCL line. 
 
 ![](media/MOSFET.png)
 
-The design was tested on an Ice40 FPGA using a RPi Pico running CircuitPython as the coordinator. 
+The design was tested on an iCE40 FPGA using a RPi Pico running CircuitPython as the coordinator. 
 
-## Media
+## Testing
 
-(optionally include any photos or videos of your design in action)
+Testing the I2C functionality can be achieved using the SCL, SDA, SDA_N (and accompanying hardware), the two ADDR_X lines, clock, and reset. Using the I2C coordinator, it can be verified that the design is responding to the proper address and the registers are functioning properly. This can be done by sending a write consisting of 19 different bytes starting at 0x01. A read of 20 bytes starting at 0x00 can then be performed, and it can be verified that these bytes read back match the bytes written to the design. If the design does not respond properly on the I2C bus, the clock and I2C bus speed should be slowed down until it does. 
 
-## (anything else)
+Testing the PWM output can be done using an oscilloscope to verify that the time high and total time for the PWM signal match the values written to the control register.
 
-If there is anything else you would like to document about your project such as background information, design space exploration, future ideas, verification details, references, etc etc. please add it here. This template is meant to be a guideline, not an exact format that you're required to follow.
+UART testing can be verified using the coordinator device to read in the UART signal and verify that it matches the value stored in register 0x01.
+
+Testing of the parallel inputs and outputs can either be done using 8 dip switches and 8 LEDs, or with GPIO pins on the coordinator device. 
+
+# Media
+
+
+
+
