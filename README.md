@@ -62,6 +62,29 @@ as memory registers if the PWM outputs are ignored or the PWM divider is set to 
 
 ![](media/registers.png) UPDATE
 
+<table>
+  <tr>
+    <th>Header 1</th>
+    <th>Header 1</th>
+    <th>Last</th>
+  </tr>
+<tr style="background-color:red">
+    <td>First</td>
+    <td>Second</td>
+    <td>Third</td>
+  </tr>
+  <tr style="background-color:blue">
+    <td>First</td>
+    <td>Second</td>
+    <td>Third</td>
+  </tr>
+  <tr style="background-color:green">
+    <td>Another</td>
+    <td>Thing</td>
+    <td>Here</td>
+  </tr>
+</table>
+
 ## UART TX
 The value in register 0x01 is continuously sent on output pin 1. 8 bits are sent per transmission with no parity bit. The line is held high for 7 bits worth of time before the next start bit is sent.
 
