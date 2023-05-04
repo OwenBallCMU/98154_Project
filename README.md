@@ -13,7 +13,21 @@ parallel output. The device also features two PWM outputs controlled using the r
 
 This design takes in a clock, active high reset, and has the following IO:
 
-![](media/IO.png)
+| Number  | Inputs  | Outputs  |
+| :---:   |  :----: |  :---:   |
+| 0       |   SCL   |  SDA_N   |
+| 1       |   SDA   |  UART_TX |
+| 2       |  ADDR_0 |  PWM_0   |
+| 3       |  ADDR_1 |  PWM_1   |
+| 4       |  D0_IN  |  D0_OUT  |
+| 5       |  D1_IN  |  D1_OUT  |
+| 6       |  D2_IN  |  D2_OUT  |
+| 7       |  D3_IN  |  D3_OUT  |
+| 8       |  D4_IN  |  D4_OUT  |
+| 9       |  D5_IN  |  D5_OUT  |
+| 10      |  D6_IN  |  D6_OUT  |
+| 11      |  D7_IN  |  D7_OUT  |
+
 
 The inputs consist of the SCL line, the SDA line, and 8 input pins. These pins
 directly map to the read-only register 0x00 as shown in the register map below.
