@@ -153,6 +153,3 @@ The code used on the Pico can be found [here.](src/picocode.py)
 ![](media/FPGA.png)
 
 
-
-
-
