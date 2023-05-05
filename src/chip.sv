@@ -20,7 +20,8 @@ module my_chip (
     assign SCL_in = io_in[0];
     assign SDA_in = io_in[1];
 
-    I2C M1 (.SCL_in, .SDA_in, .clock, .reset, .SDA_out(SDA_out_temp), .reg_out, .registers_packed, .parallel_in(io_in[11:4]), .addr_sel(io_in[3:2]));
+    I2C M1 (.SCL_in, .SDA_in, .clock, .reset, .SDA_out(SDA_out_temp), .reg_out, 
+            .registers_packed, .parallel_in(io_in[11:4]), .addr_sel(io_in[3:2]));
 
     IO  M2 (.registers_packed, .data_out, .clock, .reset);
 

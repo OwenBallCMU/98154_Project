@@ -5,6 +5,7 @@ module chipInterface (
     input logic clk100, // 100MHz clock
     input logic reset_n, // Active-low reset
     input logic SCL_in, SDA_in, i2c_reset,
+    input logic [1:0] ADDR,
     input logic [7:0] parallel_in,
     output logic [1:0] PWM,
     output logic [7:0] led,
@@ -29,7 +30,7 @@ always_ff @(posedge clk100)
         end
 
   
-assign io_in = {parallel_in, 2'b00, SDA_in, SCL_in};
+assign io_in = {parallel_in, ADDR, SDA_in, SCL_in};
 assign led = io_out[11:4];
 assign PWM = io_out[3:2];
 assign SDA_out = io_out[0];

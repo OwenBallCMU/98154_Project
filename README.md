@@ -78,6 +78,8 @@ The design features two PWM outputs, each controlled by 5 registers. For each PW
 
 When operating at 1MHz, it is recommended to set 'Total Cycles' to 16384 and operate 'High Cycles' between either 1000 and 2000 or 1024 and 2048.
 
+![](media/PWM.png)
+
 ## Writing to Registers
 In order to write to a register, the coordinator device should first send the I2C device address, followed by the target register, then the data to store to the register. If multiple bytes of data are provided, the target register will be incremented by 1 for each byte sent. This will wrap around to address 0x00, although it is not recommended to make use of this functionality. Address 0x00 is read only and will ignore attempts to write to it.
 
