@@ -148,8 +148,11 @@ The code used on the Pico can be found [here.](src/picocode.py)
 # Media
 
 [Video](media/testing_video.mp4)
+
 ![](media/breakout1.png)
+
 ![](media/breakout2.png)
+
 ![](media/FPGA.png)
 
 
