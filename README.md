@@ -5,7 +5,7 @@ Owen Ball
 
 ## Overview
 
-An I2C peripheral device with 20 8-bit registers. The device has one read only register
+An I2C peripheral device with 24 8-bit registers. The device has one read only register
 set to the value of 8 parallel inputs. The value of one register is outputted as a
 parallel output. The device also features two PWM outputs controlled using the registers.
 
@@ -49,7 +49,7 @@ The chip also has two PWM outputs and a UART output. The functionality of these 
 
 ## Register Map
 
-The design consists of 20 registers. 
+The design consists of 24 registers. 
 
 - Register 0x00 is a read only register set to the value on the inputs D0_IN - D7_IN
 
@@ -110,7 +110,7 @@ The FSM consists of 4 main stages.
 
 ## Registers
 
-The 20 registers are multiplexed to a data line using the register select sent by the I2C coordinator device. For reading from the design, a single bit is then selected from this register and sent to the SDA line. All registers are volatile. Writes occur on falling edges of SCL and require a write enable. Register 0x00 will ignore attempts to write to it.
+The 24 registers are multiplexed to a data line using the register select sent by the I2C coordinator device. For reading from the design, a single bit is then selected from this register and sent to the SDA line. All registers are volatile. Writes occur on falling edges of SCL and require a write enable. Register 0x00 will ignore attempts to write to it.
 
 ## I/O
 
@@ -128,7 +128,7 @@ The design was tested on an iCE40 FPGA using a RPi Pico running CircuitPython as
 
 ## Testing
 
-Testing the I2C functionality can be achieved using the SCL, SDA, SDA_N (and accompanying hardware), the two ADDR_X lines, clock, and reset. Using the I2C coordinator, it can be verified that the design is responding to the proper address and the registers are functioning properly. This can be done by sending a write consisting of 19 different bytes starting at 0x01. A read of 20 bytes starting at 0x00 can then be performed, and it can be verified that these bytes read back match the bytes written to the design. If the design does not respond properly on the I2C bus, the clock and I2C bus speed should be slowed down until it does. 
+Testing the I2C functionality can be achieved using the SCL, SDA, SDA_N (and accompanying hardware), the two ADDR_X lines, clock, and reset. Using the I2C coordinator, it can be verified that the design is responding to the proper address and the registers are functioning properly. This can be done by sending a write consisting of 23 different bytes starting at 0x01. A read of 24 bytes starting at 0x00 can then be performed, and it can be verified that these bytes read back match the bytes written to the design. If the design does not respond properly on the I2C bus, the clock and I2C bus speed should be slowed down until it does. 
 
 Testing the PWM output can be done using an oscilloscope to verify that the time high and total time for the PWM signal match the values written to the control register.
 
