@@ -33,7 +33,7 @@ This design takes in a clock, active high reset, and has the following IO:
 | 11      |  D7_IN  |  D7_OUT  |
 
 
-The inputs consist of the SCL line, the SDA line, 2 address select lines, and 8 input pins. The data pins directly map to the read-only register 0x00 as shown in the register map below.The address pins indicate the desired I2C address of the design. The table below shows the address that corresponds to each combination of these pins.
+The inputs consist of the SCL line, the SDA line, 2 address select lines, and 8 input pins. The data pins directly map to the read-only register 0x00 as shown in the register map below. The address pins indicate the desired I2C address of the design. The table below shows the address that corresponds to each combination of these pins.
 
 | ADDR_1, ADDR_0 | I2C Address |
 | :---:  | :---:   |
@@ -104,7 +104,7 @@ The FSM for the design is shown below. Note that for clarity, a few of the trans
 ![](media/FSM.png)
 The FSM consists of 4 main stages.
 - Init+Idle: This stage prepares the design to receive a communication and puts it into a waiting state until the communication is started. Currently RESET serves no function, as the reset line directly controls the resetting of the I2C registers. However, if desired, this state could be made to reset only some parts of the design when an input is asserted
-- Address: This stage receives the address being sent on the bus. If the address sent does not match the address of the design, it will return to its setup and waiting stage. If the address does match, and ACK will be sent and the state will be send to either READ or GET_REG depending on th read/write bit.
+- Address: This stage receives the address being sent on the bus. If the address sent does not match the address of the design, it will return to its setup and waiting stage. If the address does match, and ACK will be sent and the state will be sent to either READ or GET_REG depending on the read/write bit.
 - Write: This stage handles values being written to the I2C registers, or the sending of a register to be read from. This stage first reads in a byte from the bus, which is stored to a register select. An ACK is then sent. The design then reads in a byte in the WRITE stage, and will write this to the target register during the WRITE_ACK state. This state will also increment the register select for the next WRITE. If a read is being performed, the repeated start condition will move the FSM from the WRITE state to the ADDR state, and the register address written to the device will be remembered for the read operation.
 - Read: Following the writing of the target register and the repeated start condition, the device will begin sending the data stored in the target register onto the bus. If an ACK is sent, the device will increment the target register and send another byte. If a NACK is sent, the design will move into the READ_DONE state, which will release the SDA line so a stop condition can be sent. This state is not necessary, and a return to WAIT would suffice.
 
@@ -120,16 +120,39 @@ Some of the I2C registers are used to determine the outputs sent to the PWM, UAR
 
 ## Hardware Peripherals
 
-Both the Ice40 FPGA and the ASIC do not support leaving outputs as high impedance. As a result, in order to drive the SDA line, the SDA_N output of the chip must be fed into an NMOS with a pull-up resistor. The drain of the NMOS should then be connected to SDA. Thus when SDA_N is high, SDA is pulled to ground and otherwise, is pulled to 3.3V. The resistor value should be somewhere in the range of 2kOhm to 10kOhm, with the NMOS being capable of switching fast enough for the desired I2C speed and being able to overpower the SDA pull up resistors. Note that this chip does not perform clock stretching and as such, has no need to drive the SCL line. 
+Both the iCE40 FPGA and the ASIC do not support leaving outputs as high impedance. As a result, in order to drive the SDA line, the SDA_N output of the chip must be fed into an NMOS with a pull-up resistor. The drain of the NMOS should then be connected to SDA. Thus when SDA_N is high, SDA is pulled to ground and otherwise, is pulled to 3.3V. The resistor value should be somewhere in the range of 2kOhm to 10kOhm, with the NMOS being capable of switching fast enough for the desired I2C speed and being able to overpower the SDA pull up resistors. Note that this chip does not perform clock stretching and as such, has no need to drive the SCL line. 
 
 ![](media/MOSFET.png)
 
-The design was tested on an Ice40 FPGA using a RPi Pico running CircuitPython as the coordinator. 
+The design was tested on an iCE40 FPGA using a RPi Pico running CircuitPython as the coordinator. 
 
-## Media
+## Testing
 
-(optionally include any photos or videos of your design in action)
+Testing the I2C functionality can be achieved using the SCL, SDA, SDA_N (and accompanying hardware), the two ADDR_X lines, clock, and reset. Using the I2C coordinator, it can be verified that the design is responding to the proper address and the registers are functioning properly. This can be done by sending a write consisting of 19 different bytes starting at 0x01. A read of 20 bytes starting at 0x00 can then be performed, and it can be verified that these bytes read back match the bytes written to the design. If the design does not respond properly on the I2C bus, the clock and I2C bus speed should be slowed down until it does. 
 
-## (anything else)
+Testing the PWM output can be done using an oscilloscope to verify that the time high and total time for the PWM signal match the values written to the control register.
 
-If there is anything else you would like to document about your project such as background information, design space exploration, future ideas, verification details, references, etc etc. please add it here. This template is meant to be a guideline, not an exact format that you're required to follow.
+UART testing can be verified using the coordinator device to read in the UART signal and verify that it matches the value stored in register 0x01.
+
+Testing of the parallel inputs and outputs can either be done using 8 dip switches and 8 LEDs, or with GPIO pins on the coordinator device. 
+
+## Alchitry Cu Testing Setup
+
+The primary testing of the design was performed on the Alchitry Cu iCE40 FPGA. The FPGA was connected to a RPi Pico, as well as a SparkFun LCD and a Sparkfun LED Button. Additionally, two breakout boards were made for the FPGA, one for the SDA MOSFET, output LEDs, and a reset button, and one for input DIP switches. 
+
+The Pico was set up to read the status of the I2C button, and increment a counter accordingly. This counter value is then sent to 8 of the output LEDs by writing to register 0x01. The two PWM pins are also updated according to the counter. Address 0x00 is then read to get the status of the DIP switches. The lower 6 bits of this are converted to an RGB color, which is then sent to the LCD screen backlight. The UART line can be connected to the Pico if desired. The Pico also will perform writes to every register on the device, then read from all the registers to verify their contents. 
+
+The code used on the Pico can be found [here.](src/picocode.py)
+![](media/testing.png)
+
+# Media
+
+[Video](media/testing_video.mp4)
+![](media/breakout1.png)
+![](media/breakout2.png)
+![](media/FPGA.png)
+
+
+
+
+

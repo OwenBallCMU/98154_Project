@@ -1,6 +1,6 @@
 `default_nettype none
 
-`define REGCOUNT 20
+`define REGCOUNT 24
 
 //Top level module for design
 module my_chip (
