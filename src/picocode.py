@@ -17,7 +17,7 @@ led = digitalio.DigitalInOut(board.LED)
 led.direction = digitalio.Direction.OUTPUT
 
 i2c = busio.I2C(scl=board.GP5, sda=board.GP4, frequency=100000)
-uart = busio.UART(tx=board.GP12, rx=board.GP13, baudrate=19200, receiver_buffer_size=1)
+uart = busio.UART(tx=board.GP12, rx=board.GP13, baudrate=19200, receiver_buffer_size=1, timeout=.01) 
 
 def checkDevices():
     while not i2c.try_lock():

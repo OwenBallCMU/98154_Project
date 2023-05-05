@@ -58,7 +58,7 @@ The design consists of 24 registers.
 - Registers 0x02-0x0B are used for controlling the PWM pins. However, they can be used
 as memory registers if the PWM outputs are ignored or the PWM divider is set to 0.
 
-- Registers 0x0C-0x13 are not assigned to any function and can be used as volatile I2C memory
+- Registers 0x0C-0x17 are not assigned to any function and can be used as volatile I2C memory
 
 ![](media/registers.png)
  
