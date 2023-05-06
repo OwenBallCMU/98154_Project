@@ -28,7 +28,6 @@ always_ff @(posedge clk100)
                 counter <= '0;
             end
         end
-
   
 assign io_in = {parallel_in, ADDR, SDA_in, SCL_in};
 assign led = io_out[11:4];
@@ -39,4 +38,3 @@ assign UART = io_out[1];
 my_chip CHIP (.io_in, .io_out, .clock, .reset(i2c_reset));
 
 endmodule: chipInterface
-

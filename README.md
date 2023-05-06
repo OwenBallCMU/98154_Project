@@ -1,4 +1,4 @@
-# I2C Peripheral Device
+# I2C I/O Peripheral Device
 
 Owen Ball
 18-224/624 Spring 2023 Final Tapeout Project

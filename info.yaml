@@ -3,7 +3,6 @@ project:
   source_files:
     - toplevel_chip.v
     - chip.sv
-    - decoder.v
     - FSM.sv
     - IO.sv
     - datapath.sv
@@ -13,44 +12,64 @@ project:
 
 # This info will be automatically collected and used to make a datasheet for the chip.
 documentation: 
-  author:       "Owen Ball"      # Your name
-  discord:      "FireyTurtle#1426"      # Your discord handle
-  title:        "I2C Peripheral Device"      # Project title
-  description:  "An I2C peripheral device with 20 8-bit registers. The device has one read only
+  author:       "Owen Ball"
+  discord:      "FireyTurtle#1426"
+  title:        "I2C I/O Peripheral Device"
+  description:  "An I2C peripheral device with 24 8-bit registers. The device has one read only
   register set to the value of 8 parallel inputs. The value of one register is 
   outputted as a parallel output. The device also features two PWM outputs controlled 
-  using the registers."
-  how_it_works: "Refer to https://github.com/OwenBallCMU/98154_Project."      # Longer description of how the project works
-  how_to_test:  "PLACEHOLDER"      # Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
-  external_hw:  "PLACEHOLDER"      # Describe any external hardware needed
+  using the registers, as well as one UART TX output. When both ADDR_X pins are grounded
+  the address of the device is 0x20. Other addresses can be used by changing these pins
+  as discussed in the README.md"
+  how_it_works: "The design reads in the SCL and SDA lines. The design uses an FSM
+  to keep track of where in the I2C communication it currently is and will enable and disable
+  components of the datapath accordingly. The I2C communication allows the coordinator device
+  to read or write to a collection of registers by first specifying a register address and then
+  reading or writing data. Some of the registers are hooked up to input and output pins, while
+  others just serve as general purpose memory registers."
+  how_to_test:  "The minimal setup needed to test the design is an I2C coordinator device,
+  a clock signal at least 10x the I2C frequency, the reset line, the SCL line, and the SDA line
+  along with the accompanying NMOS circuit connected to SDA_N. The ADDR_X pins should also
+  be connected in order to give the device a fixed address. The coordinator should be able to
+  write to all the registers except 0x00 and then read from all the registers. The parallel
+  input can be tested by connecting DIP switches or GPIO pins of the coordinator device to the
+  input pins, and then reading the value of register 0x00 to verify that the input is functioning.
+  The parallel outputs can be tested by hooking up LEDs to the output pins and writing a value to
+  register 0x01. The PWM pins can be tested using an oscilloscope, which can verify that the period
+  and high time of the signal is as expected given the status of the PWM registers. The UART output
+  can be tested by having the coordinator read in the UART signal and verify that it matches the
+  value stored in register 0x01."
+  external_hw:  "A NMOS to pull the SDA line to ground when SDA_N is asserted and
+  release the line otherwise. An I2C coordinator device is also needed. This can
+  be a RPi Pico, Arduino, Teensy, etc."
   language:     "verilog" # other examples include Verilog, Amaranth, VHDL, etc
-  doc_link:     ""      # URL to longer form documentation, eg the README.md in your repository
+  doc_link:     "https://github.com/OwenBallCMU/98154_Project/blob/master/README.md"
   clock_hz:     1000000       # Clock frequency in Hz (if required)
-  picture:      ""      # relative path to a picture in your repository
+  picture:      "https://github.com/OwenBallCMU/98154_Project/blob/master/media/testing.png"
   inputs:               # a description of what the inputs do
-    - SCL
-    - SDA
-    - ADDR_0
-    - ADDR_1
-    - D0_IN
-    - D1_IN
-    - D2_IN
-    - D3_IN
-    - D4_IN
-    - D5_IN
-    - D6_IN
-    - D7_IN
+    - SCL - Input SCL line
+    - SDA - Input SDA line
+    - ADDR_0 - I2C address select 0
+    - ADDR_1 - I2C address select 1
+    - D0_IN - Parallel data in bit 0. Goes to register 0x00
+    - D1_IN - Parallel data in bit 1. Goes to register 0x00
+    - D2_IN - Parallel data in bit 2. Goes to register 0x00
+    - D3_IN - Parallel data in bit 3. Goes to register 0x00
+    - D4_IN - Parallel data in bit 4. Goes to register 0x00
+    - D5_IN - Parallel data in bit 5. Goes to register 0x00
+    - D6_IN - Parallel data in bit 6. Goes to register 0x00
+    - D7_IN - Parallel data in bit 7. Goes to register 0x00
   outputs:
-    - SDA_N
-    - UART_TX
-    - PWM_0
-    - PWM_1
-    - D0_OUT
-    - D1_OUT
-    - D2_OUT
-    - D3_OUT
-    - D4_OUT
-    - D5_OUT
-    - D6_OUT
-    - D7_OUT
+    - SDA_N - Output SDA used to control pull-down NMOS
+    - UART_TX - UART pin that sends the data in register 0x01. Operates at the clock speed divded by 52
+    - PWM_0 - PWM output pin 0
+    - PWM_1 - PWM output pin 1
+    - D0_OUT - Parallel data out bit 0. Comes from register 0x01
+    - D1_OUT - Parallel data out bit 1. Comes from register 0x01
+    - D2_OUT - Parallel data out bit 2. Comes from register 0x01
+    - D3_OUT - Parallel data out bit 3. Comes from register 0x01
+    - D4_OUT - Parallel data out bit 4. Comes from register 0x01
+    - D5_OUT - Parallel data out bit 5. Comes from register 0x01
+    - D6_OUT - Parallel data out bit 6. Comes from register 0x01
+    - D7_OUT - Parallel data out bit 7. Comes from register 0x01
 
